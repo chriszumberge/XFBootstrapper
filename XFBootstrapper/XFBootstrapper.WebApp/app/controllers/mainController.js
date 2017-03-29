@@ -1,8 +1,9 @@
 ﻿"use strict";
-angular.module('app').controller('mainController', ['$scope', '$mdMedia', '$mdSidenav', '$location',
-    function ($scope, $mdMedia, $mdSidenav, $location) {
+angular.module('app').controller('mainController', ['$scope', '$mdMedia', '$mdSidenav', '$location', '$interval',
+    function ($scope, $mdMedia, $mdSidenav, $location, $interval) {
 
         // TODO initializing plugins and features
+        $scope.$location = $location;
 
         $scope.theme = 'xfbootstrapper';
 
@@ -24,63 +25,117 @@ angular.module('app').controller('mainController', ['$scope', '$mdMedia', '$mdSi
             $location.path(routeName);
         };
 
-        $scope.project = {};
-        $scope.configPageIndex = 0;
+        $scope.project = {
+            name: undefined,
+            type: undefined,
+            platforms: []
+        };
 
-        //if ($scope.project === undefined) {
-        //    // Initailize the project
-        //    $scope.project = {};
-        //    // Set the location to the start
-        //    $location.path("start");
-        //}
+        $scope.getPercentComplete = function () {
+            var percent = 0;
+
+            if ($scope.validateProjectName()) { percent += 10; }
+            if ($scope.project.type == 'mobile') {
+                percent += 5;
+                if ($scope.project.platforms !== undefined && $scope.project.platforms.length > 0) {
+                    percent += 10;
+                }
+            } else if ($scope.project.type == 'web') {
+                percent += 15;
+            }
+
+            return percent;
+        };
+
+        $scope.previousPage = function () {
+            switch ($location.path()) {
+                case '/start':
+                    break;
+                case '/type':
+                    $scope.changeLocation('start');
+                    break;
+                case '/mobileplatform':
+                    $scope.changeLocation('type');
+                    break;
+                default:
+
+            }
+        };
+
+        $scope.nextPage = function () {
+            switch ($location.path()) {
+                case '/start':
+                    $scope.changeLocation('type');
+                    break;
+                case '/type':
+                    if ($scope.project.type == 'mobile') {
+                        $scope.changeLocation('mobileplatform');
+                    }
+                    break;
+                case '/mobileplatform':
+                    break;
+                default:
+
+            }
+        };
 
         $scope.sanitizeProjectName = function () {
             if ($scope.project.name) {
                 $scope.project.name = $scope.project.name.replace(" ", "_").replace(/[^a-zA-Z0-9._-]/g, '');
             }
         };
-
-        // TODO I hate this.. all of it.. 
-        $scope.configPages = configPages;
-        $scope.currentPage = $scope.configPages[$scope.configPageIndex];
-        $scope.currentPage.isActive = true;
-        $scope.changeLocation($scope.currentPage.routeName);
-        $scope.configValues = $scope.currentPage.configValues;
-
-        $scope.isPreviousDisabled = $scope.currentPage.isPreviousDisabled;
-        $scope.isNextDisabled = $scope.currentPage.isNextDisabled;
-
-        // TODO have to set isValid and isActive when clicking away on the menu
-        $scope.previousPage = function () {
-            if ($scope.configPageIndex > 0) {
-                $scope.currentPage.isActive = false;
-                // if we're able to nav away, have to assume page data is valid
-                //$scope.currentPage.isValid = true;
-                $scope.configPageIndex--;
-                $scope.currentPage = $scope.configPages[$scope.configPageIndex];
-                $scope.changeLocation($scope.currentPage.routeName);
-                $scope.currentPage.isActive = true;
-                $scope.configValues = $scope.currentPage.configValues;
-                $scope.isPreviousDisabled = $scope.currentPage.isPreviousDisabled;
-                $scope.isNextDisabled = $scope.currentPage.isNextDisabled;
-            }
-        };
-        $scope.nextPage = function () {
-            if (!($scope.configPageIndex >= $scope.configPages.length)) {
-                $scope.currentPage.isActive = false;
-                // if we're able to nav away, have to assume page data is valid
-                //$scope.currentPage.isValid = true;
-                $scope.configPageIndex++;
-                $scope.currentPage = $scope.configPages[$scope.configPageIndex];
-                $scope.changeLocation($scope.currentPage.routeName);
-                $scope.currentPage.isActive = true;
-                $scope.configValues = $scope.currentPage.configValues;
-                $scope.isPreviousDisabled = $scope.currentPage.isPreviousDisabled;
-                $scope.isNextDisabled = $scope.currentPage.isNextDisabled;
-            }
+        $scope.validateProjectName = function () {
+            return $scope.project.name !== undefined && $scope.project.name.length > 3;
         };
 
-        $scope.percentComplete = 0;
+        //$scope.appIconIndex = 0;
+        //$scope.webAppIcons = ['desktop_mac', 'web', 'computer'];
+        //$scope.mobileAppIcons = ['phone_android', 'smartphone', 'phone_iphone'];
+        //$scope.webAppIcon = $scope.webAppIcons[$scope.appIconIndex];
+        //$scope.mobileAppIcon = $scope.mobileAppIcons[$scope.appIconIndex];
+        //$interval(function () {
+        //    $scope.appIconIndex++;
+        //    if ($scope.appIconIndex >= $scope.webAppIcons.length) {
+        //        $scope.appIconIndex = 0;
+        //    }
 
+        //    $scope.webAppIcon = $scope.webAppIcons[$scope.appIconIndex];
+        //    $scope.mobileAppIcon = $scope.mobileAppIcons[$scope.appIconIndex];
+        //}, 2000, 0);
+
+
+        $scope.toggleMobilePlatform = function (platform) {
+            if (platform.isEnabled) {
+                platform.isChecked = !platform.isChecked;
+                if (platform.isChecked) {
+                    $scope.project.platforms.insert(platform);
+                } else {
+                    $scope.project.platforms.remove(platform);
+                }
+            }
+        };
+        $scope.mobilePlatformSource = [
+            {
+                id: 'iphone',
+                name: 'iPhone',
+                icon: 'phone_iphone',
+                isEnabled: true,
+                isChecked: false
+            },
+            {
+                id: 'droid',
+                name: 'Android',
+                icon: 'phone_android',
+                isEnabled: true,
+                isChecked: false
+            },
+            {
+                id: 'uwp',
+                name: 'Windows Phone',
+                icon: 'smartphone',
+                isEnabled: false,
+                isChecked: false
+            }
+        ];
     }
 ])

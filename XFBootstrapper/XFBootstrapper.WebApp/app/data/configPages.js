@@ -1,63 +1,76 @@
 ﻿//angular.module('app').value
 
 var configPages = [
+    // config pages are defined by the system
     {
-        pageName: "Project Naming",
-        routeName: "start",
-        isActive: false,
-        isValid: function (cValues) {
-            return !(cValues.filter(function (configValue) {
-                if (configValue.type == "string") {
-                    return configValue.value === undefined || configValue.value.length < configValue.minLength;
-                }
-            }).length == 0);
-        },
-        //progress: 10,
-        configValues: [
+        pageName: "Services and Features",
+        routeName: "features",
+        configCategories: [
             {
-                name: "Project Name",
-                type: "string",
-                value: undefined,
-                template: '<config-value-input config-model="project.name" ng-change-handler="sanitizeProjectName()"></config-value-input>',
-                minLength: 4,
-            }
-        ],
-        isNextDisabled: function (project) {
-            return project.name === undefined || project.name.length < 4;
-        },
-        isPreviousDisabled: function (cValues) {
-            return true;
-        },
-    },
-    {
-        pageName: "Project Type",
-        routeName: "type",
-        isActive: false,
-        isValid: function () {
-            return false;
-        },
-        //progress: 10,
-        configValues: [
-            {
-                name: "Project Type",
-                type: "string",
-                template: '<h1>Project Type Here</h1>',
-                control: "select-grid",
-                options: [
+                categoryName: "Authentication",
+                configOptions: [
                     {
-                        name: "Mobile Application"
+                        optionName: "Facebook",
+                        isEnabled: true,
+                        configValues: [
+                            {
+                                name: "Auth Key",
+                                value: undefined,
+                                helpText: "",
+                                helpLink: "",
+                                template: '<config-value-input config-model="project.features.authentication.facebook.authkey" label="Facebook Auth Key"></config-value-input>'
+                            }
+                        ]
                     },
                     {
-                        name: "Web Application"
+                        optionName: "Google",
+                        isEnabled: true,
+                        configValues: [
+                            {
+                                name: "Auth Key",
+                                value: undefined,
+                                helpText: "",
+                                helpLink: "",
+                                template: '<config-value-input config-model="project.features.authentication.google.authkey" label="Google Auth Key"></config-value-input>'
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                categoryName: "Push Notifications",
+                configOptions: [
+                    {
+                        optionName: '',
+                        isEnabled: true,
+                        configValues: [
+                            {
+
+                            }
+                        ]
                     }
                 ]
             }
-        ],
-        isNextDisabled: function () {
-            return true;
-        },
-        isPreviousDisabled: function () {
-            return false;
-        }
+        ]
+    },
+    {
+        pageName: "Advanced Settings",
+        routeName: "advanced",
+        configOptions: [
+            {
+                optionName: "Business Logic",
+                isEnabled: true,
+                configValues: [
+                    {
+                        template: '',
+                        options: [
+                            { id: 1, name: "In Application with Azure Mobile Service as Backend", isEnabled: "if type is mobile application" },
+                            { id: 2, name: "Customized .Net WebApi Backend", isEnabled: false },
+                            { id: 3, name: "Customized node.js Backend", isEnabled: false }
+                        ]
+                    }
+                ]
+            }
+        ]
     }
 ];

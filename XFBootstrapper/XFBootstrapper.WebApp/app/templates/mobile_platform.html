@@ -1,0 +1,56 @@
+﻿<div layout="column" style="margin-bottom: 20px;">
+    <h1 md-colors="::{color: 'primary'}">Mobile App Platform</h1>
+    <h3>The next step is to choose the platforms you'd like you mobile app to run on</h3>
+    <div layout="row" layout-sm="column" flex>
+        <div ng-repeat="mobilePlatform in mobilePlatformSource" flex layout="column" 
+             md-colors="{borderColor: mobilePlatform.isEnabled ? mobilePlatform.isChecked ? 'amber' : 'primary': 'accent', 
+                         color: mobilePlatform.isEnabled ? mobilePlatform.isChecked ? 'amber' : 'primary': 'accent'}" 
+             ng-click="toggleMobilePlatform(mobilePlatform)"
+             style="cursor:pointer; border-width: 3px; border-radius: 10px; border-style: solid; text-align:center; min-width: 200px; min-height: 200px; margin-left: 5px; margin-right: 5px;">
+            <span flex></span>
+            <h2>{{ mobilePlatform.name }}</h2>
+            <div layout="row">
+                <span flex></span>
+                <ng-md-icon icon="{{ mobilePlatform.isChecked ? 'check' : mobilePlatform.icon }}" size="40" options='{"rotation": "none", "duration": "300"}'></ng-md-icon>
+                <span flex></span>
+            </div>
+            <span flex></span>
+        </div>
+        
+        <!--<div flex layout="column" md-colors="::{borderColor: 'primary', color: 'primary'}" ng-click=""
+             style="cursor:pointer; border-width: 3px; border-radius: 10px; border-style: solid; text-align:center; min-width: 200px; min-height: 200px;">
+            <span flex></span>
+            <h2>iPhone</h2>
+            <div layout="row">
+                <span flex></span>
+                <ng-md-icon icon="phone_iphone"></ng-md-icon>
+                <span flex></span>
+            </div>
+            <span flex></span>
+        </div>
+        <span flex></span>
+        <div flex layout="column" md-colors="::{borderColor: 'primary', color: 'primary'}" ng-click=""
+             style="cursor: pointer; border-width: 3px; border-radius: 10px; border-style: solid; text-align:center; min-width: 200px; min-height: 200px;">
+            <span flex></span>
+            <h2>Android</h2>
+            <div layout="row">
+                <span flex></span>
+                <ng-md-icon icon="phone_android"></ng-md-icon>
+                <span flex></span>
+            </div>
+            <span flex></span>
+        </div>
+        <span flex></span>
+        <div flex layout="column" md-colors="::{borderColor: 'accent-100', color: 'accent-100'}"
+             style="cursor: not-allowed; border-width: 3px; border-radius: 10px; border-style: solid; text-align:center; min-width: 200px; min-height: 200px;">
+            <span flex></span>
+            <h2>Windows Phone</h2>
+            <div layout="row">
+                <span flex></span>
+                <ng-md-icon icon="smartphone"></ng-md-icon>
+                <span flex></span>
+            </div>
+            <span flex></span>
+        </div>-->
+    </div>
+</div>

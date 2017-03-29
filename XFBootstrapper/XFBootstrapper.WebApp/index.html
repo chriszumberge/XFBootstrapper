@@ -32,6 +32,8 @@
     <script src="bower_components/wow/dist/wow.min.js"></script>
 
     <!-- Infrastructure Scripts -->
+    <script src="Content/js/jsHelpers.js"></script>
+    <script src="Content/js/jsLinqHelpers.js"></script>
     <script src="app/appModule.js"></script>
     <script src="app/appConstants.js"></script>
     <script src="app/appValues.js"></script>
@@ -52,7 +54,7 @@
     <script src="app/services/projectBuilderService.js"></script>
 
     <script src="app/directives/structural/configValueInput/configValueInputDirective.js"></script>
-    
+
     <script src="app/controllers/mainController.js"></script>
 
     <script src="app/data/configPages.js"></script>
@@ -84,8 +86,8 @@
                             <span>New XFBootstrapper Project</span>
                         </div>
                         <div layout="column">
-                            <div layout-padding>Project Configuration is {{percentComplete}}% complete</div>
-                            <md-progress-linear class="md-primary" md-mode="determinate" value="{{percentComplete}}"
+                            <div layout-padding>Project Configuration is {{getPercentComplete()}}% complete</div>
+                            <md-progress-linear class="md-primary" md-mode="determinate" value="{{getPercentComplete()}}"
                                                 md-buffer-value="{{thisStepCompletionValue}}"></md-progress-linear>
                         </div>
                         <div layout="row">
@@ -94,18 +96,50 @@
                             </md-button>
                         </div>
                     </div>
-                    <div layout="column" layout-padding>
+                    <div layout="column" layout-padding id="project-configuration-col">
                         <span>Project Configuration</span>
+                        <div layout="column" layout-padding>
+                            <md-button ng-class="{'md-primary': $location.path() == '/start' && configForm.$valid, 'md-accent': $location.path() != ('/start'),
+                                       'md-warn': $location.path() == '/start' && !configForm.$valid}"
+                                       ng-click="changeLocation('start')" style="text-transform: capitalize; text-align: left"
+                                       ng-disabled="false">
+                                <div layout="row" flex>
+                                    <span flex>Start and Project Naming</span>
+                                    <ng-md-icon icon="check" md-colors="::{fill: 'primary'}"
+                                                ng-show="validateProjectName()"></ng-md-icon>
+                                </div>
+                            </md-button>
+                        </div>
+                        <div layout="column" layout-padding>
+                            <md-button ng-class="{'md-primary': $location.path() == ('/type') && project.type !== undefined, 'md-accent': $location.path() != ('/type'),
+                                       'md-warn': $location.path() == ('/type') && project.type === undefined}"
+                                       ng-click="changeLocation('type')" style="text-transform: capitalize; text-align: left"
+                                       ng-disabled="">
+                                <div layout="row" flex>
+                                    <span flex>Project Type</span>
+                                    <ng-md-icon icon="check" md-colors="::{fill: 'primary'}"
+                                                ng-show="project.type !== undefined"></ng-md-icon>
+                                </div>
+                            </md-button>
+                            <div layout="column" ng-show="project.type == 'mobile'" style="padding-left:35px; padding-right:0;">
+                                <md-button ng-class="{'md-primary': $location.path() == ('/mobileplatform') && project.platforms.length != 0, 'md-accent': $location.path() != ('/mobileplatform'),
+                                           'md-warn': $location.path() == ('/mobileplatform') && project.platforms.length == 0}"
+                                           ng-click="changeLocation('mobileplatform')" style="text-transform: capitalize; text-align: left"
+                                           ng-disabled="">
+                                    <div layout="row" flex>
+                                        <span flex>Mobile Platforms</span>
+                                        <ng-md-icon icon="check" md-colors="::{fill: 'primary'}"
+                                                    ng-show="project.platforms.length > 0"></ng-md-icon>
+                                    </div>
+                                </md-button>
+                            </div>
+                        </div>
                         <div layout="column" layout-padding ng-repeat="configPage in configPages">
-                            <md-button ng-class="{'md-primary': configPage.isActive || configPage.isValid(), 'md-accent': !configPage.isActive && !configPage.isValid}" 
+                            <md-button ng-class="{'md-primary': configPage.isActive || configPage.isValid(), 'md-accent': !configPage.isActive && !configPage.isValid}"
                                        ng-click="changeLocation(configPage.routeName)" style="text-transform: capitalize; text-align: left"
                                        ng-disabled="!configPage.isActive && !configPage.isValid()">
                                 <span>{{ configPage.pageName }}</span>
                             </md-button>
-                            <!--<div layout="column" layout-padding ng-repeat="configValue in configPage.configValues"
-                                 ng-show="configValue.value !== undefined">
-                                <span>{{ configValue.name }}</span>
-                            </div>-->
                         </div>
                     </div>
                 </md-content>
@@ -125,23 +159,24 @@
                     </div>
                 </md-toolbar>
                 <section class="view-section" layout="column" flex layout-align="top center">
-                    <ng-view layout="column"></ng-view>
-                    <div layout="row" flex>
-                        <div flex="100" flex-gt-xs="50" layout-align="top left">
-                            <md-button class="md-primary md-raised" style="color: white;" ng-disabled="isPreviousDisabled()" ng-click="previousPage();">
-                                <ng-md-icon icon="arrow_back" style="fill: white;"></ng-md-icon>
-                                Previous Page
-                            </md-button>
+                    <form layout="column" name="configForm" flex>
+                        <ng-view layout="column"></ng-view>
+                        <div layout="row" flex>
+                            <!--<div flex="100" flex-gt-xs="50" layout-align="top left">
+                                <md-button class="md-primary md-raised" style="color: white;" ng-disabled="!configForm.$valid" ng-click="previousPage();">
+                                    <ng-md-icon icon="arrow_back" style="fill: white;"></ng-md-icon>
+                                    Previous Page
+                                </md-button>
+                            </div>-->
+                            <div flex="100" flex-gt-xs="50" layout-align="top right">
+                                <md-button class="md-primary md-raised" style="color: white;" ng-disabled="!configForm.$valid"
+                                           ng-click="nextPage();">
+                                    Next Page
+                                    <ng-md-icon icon="arrow_forward" style="fill: white;"></ng-md-icon>
+                                </md-button>
+                            </div>
                         </div>
-                        <div flex="100" flex-gt-xs="50" layout-align="top right">
-                            <!--ng-disabled="project.name === undefined || project.name === '' || project.name.length < 4"-->
-                            <md-button class="md-primary md-raised" style="color: white;" ng-disabled="isNextDisabled(project)"
-                                       ng-click="nextPage();">
-                                Next Page
-                                <ng-md-icon icon="arrow_forward" style="fill: white;"></ng-md-icon>
-                            </md-button>
-                        </div>
-                    </div>
+                    </form>
                 </section>
             </md-content>
         </section>

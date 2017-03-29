@@ -17,7 +17,13 @@ angular.module('app').config(['$routeProvider', function ($routeProvider) {
         {
             url: '/type',
             config: {
-                template: '<h1>Type</h1><config-page-content></config-page-content>'
+                templateUrl: 'app/templates/project_type.html'
+            }
+        },
+        {
+            url: '/mobileplatform',
+            config: {
+                templateUrl: 'app/templates/mobile_platform.html'
             }
         }
     ];

@@ -1,4 +1,10 @@
-﻿<div layout="column" ng-repeat="configValue in configValues">
-    <config-page-content-body>
-    </config-page-content-body>
+﻿<div layout="column" ng-repeat="configCategory in configCategories">
+    {{ configCategory.categoryName }}
+    <div layout="column" ng-repeat="configOption in configCategory.configOptions">
+        {{ configOption.optionName }}
+        <div layout="column" ng-repeat="configValue in configOption.configValues">
+            <config-page-content-body>
+            </config-page-content-body>
+        </div>
+    </div>
 </div>

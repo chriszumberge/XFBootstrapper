@@ -1,5 +1,5 @@
 ﻿<div layout="column">
-    <h1 md-colors="{color: 'primary'}">Welcome to XFBootstrapper!</h1>
+    <h1 md-colors="::{color: 'primary'}">Welcome to XFBootstrapper!</h1>
     <h3>XFBootstrapper will walk you through, step by step, building and configuring an application.</h3>
     <h3>
         Whenever you see this icon
@@ -21,4 +21,5 @@
     </h3>
     <h3>We'll get you started here building apps in just a second, but first, what's the name of your app? <br />(You can change this later)</h3>
 </div>
-<config-page-content></config-page-content>
+<config-value-input config-model="project.name" ng-change-handler="sanitizeProjectName()" label="Project Name" min-length="4" required="true"></config-value-input>
+<!--<config-page-content></config-page-content>-->

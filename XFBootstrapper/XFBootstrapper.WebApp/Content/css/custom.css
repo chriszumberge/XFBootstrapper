@@ -48,3 +48,8 @@ md-toolbar.md-primary {
     md-toolbar.md-primary .md-toolbar-text {
         color: white;
     }
+
+#project-configuration-col div.layout-padding {
+    padding-top: 0;
+    padding-bottom: 0;
+}

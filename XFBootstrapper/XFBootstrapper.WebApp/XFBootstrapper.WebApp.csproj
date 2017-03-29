@@ -73,6 +73,10 @@
     <Content Include="app\infrastructure\configPageContentBodyTemplate.html" />
     <Content Include="app\infrastructure\configPageContentDirective.js" />
     <Content Include="app\infrastructure\configPageContentTemplate.html" />
+    <Content Include="app\templates\mobile_platform.html" />
+    <Content Include="app\templates\project_type.html" />
+    <Content Include="Content\js\jsHelpers.js" />
+    <Content Include="Content\js\jsLinqHelpers.js" />
     <Content Include="packages.config" />
     <Content Include="bower.json" />
     <Content Include="bower_components\angular-animate\.bower.json" />
@@ -241,7 +245,6 @@
     <Content Include="app\directives\decorators\ngIgnoreMouseWheel.js" />
     <Content Include="app\directives\decorators\ngOnRepeatFinished.js" />
     <Content Include="app\services\projectBuilderService.js" />
-    <Content Include="app\templates\home.html" />
     <Content Include="app\templates\start_here.html" />
     <Content Include="bower_components\angular-animate\angular-animate.js" />
     <Content Include="bower_components\angular-animate\angular-animate.min.js" />
@@ -1551,7 +1554,6 @@
     <Folder Include="app\factories\" />
     <Folder Include="app\providers\" />
     <Folder Include="app\views\" />
-    <Folder Include="Content\js\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

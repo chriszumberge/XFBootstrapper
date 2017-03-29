@@ -1,4 +1,4 @@
-﻿<md-input-container class="md-block" flex-gt-sm>
-    <label>Project Name</label>
-    <input ng-model="configModel" ng-change="ngChangeHandler()" ng-trim="false" />
+﻿<md-input-container class="md-block" flex="80">
+    <label>{{ label }}</label>
+    <input name="{{label}}" ng-model="configModel" ng-change="ngChangeHandler()" ng-trim="false" ng-required="required" ng-minlength="minLength" />
 </md-input-container>
