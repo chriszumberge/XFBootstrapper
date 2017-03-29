@@ -66,6 +66,13 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\data\configPages.js" />
+    <Content Include="app\directives\structural\configValueInput\configValueInputDirective.js" />
+    <Content Include="app\directives\structural\configValueInput\configValueInputTemplate.html" />
+    <Content Include="app\infrastructure\configPageContentBodyDirective.js" />
+    <Content Include="app\infrastructure\configPageContentBodyTemplate.html" />
+    <Content Include="app\infrastructure\configPageContentDirective.js" />
+    <Content Include="app\infrastructure\configPageContentTemplate.html" />
     <Content Include="packages.config" />
     <Content Include="bower.json" />
     <Content Include="bower_components\angular-animate\.bower.json" />
@@ -1541,7 +1548,6 @@
   <ItemGroup>
     <Folder Include="app\auth\" />
     <Folder Include="app\decorators\" />
-    <Folder Include="app\directives\structural\" />
     <Folder Include="app\factories\" />
     <Folder Include="app\providers\" />
     <Folder Include="app\views\" />

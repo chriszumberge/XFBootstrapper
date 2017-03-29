@@ -2,9 +2,7 @@
 angular.module('app').controller('mainController', ['$scope', '$mdMedia', '$mdSidenav', '$location',
     function ($scope, $mdMedia, $mdSidenav, $location) {
 
-
         // TODO initializing plugins and features
-
 
         $scope.theme = 'xfbootstrapper';
 
@@ -26,14 +24,15 @@ angular.module('app').controller('mainController', ['$scope', '$mdMedia', '$mdSi
             $location.path(routeName);
         };
 
-        $scope.project;
+        $scope.project = {};
+        $scope.configPageIndex = 0;
 
-        if ($scope.project === undefined) {
-            // Initailize the project
-            $scope.project = {};
-            // Set the location to the start
-            $location.path("start");
-        }
+        //if ($scope.project === undefined) {
+        //    // Initailize the project
+        //    $scope.project = {};
+        //    // Set the location to the start
+        //    $location.path("start");
+        //}
 
         $scope.sanitizeProjectName = function () {
             if ($scope.project.name) {
@@ -41,9 +40,47 @@ angular.module('app').controller('mainController', ['$scope', '$mdMedia', '$mdSi
             }
         };
 
-        $scope.percentComplete = 0;
-        $scope.thisStepCompletionValue = 50;
+        // TODO I hate this.. all of it.. 
+        $scope.configPages = configPages;
+        $scope.currentPage = $scope.configPages[$scope.configPageIndex];
+        $scope.currentPage.isActive = true;
+        $scope.changeLocation($scope.currentPage.routeName);
+        $scope.configValues = $scope.currentPage.configValues;
 
+        $scope.isPreviousDisabled = $scope.currentPage.isPreviousDisabled;
+        $scope.isNextDisabled = $scope.currentPage.isNextDisabled;
+
+        // TODO have to set isValid and isActive when clicking away on the menu
+        $scope.previousPage = function () {
+            if ($scope.configPageIndex > 0) {
+                $scope.currentPage.isActive = false;
+                // if we're able to nav away, have to assume page data is valid
+                //$scope.currentPage.isValid = true;
+                $scope.configPageIndex--;
+                $scope.currentPage = $scope.configPages[$scope.configPageIndex];
+                $scope.changeLocation($scope.currentPage.routeName);
+                $scope.currentPage.isActive = true;
+                $scope.configValues = $scope.currentPage.configValues;
+                $scope.isPreviousDisabled = $scope.currentPage.isPreviousDisabled;
+                $scope.isNextDisabled = $scope.currentPage.isNextDisabled;
+            }
+        };
+        $scope.nextPage = function () {
+            if (!($scope.configPageIndex >= $scope.configPages.length)) {
+                $scope.currentPage.isActive = false;
+                // if we're able to nav away, have to assume page data is valid
+                //$scope.currentPage.isValid = true;
+                $scope.configPageIndex++;
+                $scope.currentPage = $scope.configPages[$scope.configPageIndex];
+                $scope.changeLocation($scope.currentPage.routeName);
+                $scope.currentPage.isActive = true;
+                $scope.configValues = $scope.currentPage.configValues;
+                $scope.isPreviousDisabled = $scope.currentPage.isPreviousDisabled;
+                $scope.isNextDisabled = $scope.currentPage.isNextDisabled;
+            }
+        };
+
+        $scope.percentComplete = 0;
 
     }
 ])

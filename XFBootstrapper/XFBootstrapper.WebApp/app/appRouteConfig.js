@@ -13,6 +13,12 @@ angular.module('app').config(['$routeProvider', function ($routeProvider) {
                 //    viewTitle: function () { return "Home"; }
                 //}
             }
+        },
+        {
+            url: '/type',
+            config: {
+                template: '<h1>Type</h1><config-page-content></config-page-content>'
+            }
         }
     ];
 
