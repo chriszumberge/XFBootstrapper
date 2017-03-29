@@ -1,0 +1,1 @@
+﻿.animate-fade-in{opacity:1;}.animate-fade-in.ng-hide-add,.animate-fade-in.ng-hide-remove{transition:all linear .25s;}.animate-fade-in.ng-hide{opacity:0;}.animate-rise-up{transform:translateY(-10px) scale(1);}.animate-rise-up.ng-hide-add,.animate-rise-up.ng-hide-remove{transition:all linear .25s;}.animate-rise-up.ng-hide{transform:translateY(0) scale(.98);}

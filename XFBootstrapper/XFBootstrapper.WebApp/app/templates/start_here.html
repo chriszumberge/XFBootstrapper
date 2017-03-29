@@ -1,0 +1,43 @@
+﻿<div layout="column">
+    <h1 md-colors="{color: 'primary'}">Welcome to XFBootstrapper!</h1>
+    <h3>XFBootstrapper will walk you through, step by step, building and configuring an application.</h3>
+    <h3>
+        Whenever you see this icon
+        <ng-md-icon icon="info" md-colors="{fill: 'primary'}">
+            <md-tooltip>
+                Hopefully this helps you!
+            </md-tooltip>
+        </ng-md-icon>
+        , be sure to hover it with you mouse as it may contain helpful information to help you make configuration decisions.
+    </h3>
+    <h3>
+        Whenever you see this icon
+        <ng-md-icon icon="error" md-colors="{fill: 'warn'}">
+            <md-tooltip>
+                An error is here!
+            </md-tooltip>
+        </ng-md-icon>
+        , however; it means there's something wrong with what you've chosen. Hover it for more information.
+    </h3>
+    <h3>We'll get you started here building apps in just a second, but first, what's the name of your app? <br />(You can change this later)</h3>
+</div>
+<div layout="column">
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>Project Name</label>
+        <input ng-model="project.name" ng-change="sanitizeProjectName()" ng-trim="false" />
+    </md-input-container>
+</div>
+<div layout="row">
+    <div flex="100" flex-gt-xs="50" layout-align="top left">
+        <md-button class="md-primary md-raised" style="color: white;" ng-disabled="true">
+            <ng-md-icon icon="arrow_back" style="fill: white;"></ng-md-icon>
+            Previous Page
+        </md-button>
+    </div>
+    <div flex="100" flex-gt-xs="50" layout-align="top right">
+        <md-button class="md-primary md-raised" style="color: white;" ng-disabled="project.name === undefined || project.name === '' || project.name.length < 4">
+            Next Page
+            <ng-md-icon icon="arrow_forward" style="fill: white;"></ng-md-icon>
+        </md-button>
+    </div>
+</div>

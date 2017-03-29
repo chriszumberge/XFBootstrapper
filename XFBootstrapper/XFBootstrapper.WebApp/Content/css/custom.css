@@ -1,0 +1,50 @@
+﻿/* Index.html Styles */
+.main-controller {
+    height: 100vh;
+    width: 100vw;
+}
+
+    .main-controller > section {
+        max-height: 100%;
+        max-width: 100%;
+    }
+
+        .main-controller > section > .md-sidenav-left {
+            min-height: 100vh;
+            max-height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+            .main-controller > section > .md-sidenav-left md-toolbar svg {
+                fill: white;
+            }
+
+        .main-controller > section > md-content {
+            max-height: 100vh;
+            min-height: 100vh;
+        }
+
+            .main-controller > section > md-content md-toolbar svg {
+                fill: white;
+            }
+
+            .main-controller > section > md-content .view-section {
+                max-height: calc(100% - 64px);
+                min-height: calc(100% - 64px);
+                max-width: 100%;
+            }
+
+md-toolbar.md-primary {
+    color: white;
+    fill: white;
+}
+
+    md-toolbar.md-primary .md-toolbar-brand {
+        color: white;
+        margin-left: 10px;
+    }
+
+    md-toolbar.md-primary .md-toolbar-text {
+        color: white;
+    }

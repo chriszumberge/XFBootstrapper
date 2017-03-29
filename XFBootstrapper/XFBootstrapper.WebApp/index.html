@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <!-- Metadata -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=yes">
+    <title>XFBootstrapper</title>
+
+    <!-- Library Styles -->
+    <link href="bower_components/angular-material/angular-material.min.css" rel="stylesheet" />
+    <link href="bower_components/angular-material-icons/angular-material-icons.css" rel="stylesheet" />
+
+    <!-- Custom Styles -->
+    <link href="Content/css/accessibility.min.css" rel="stylesheet" />
+    <link href="Content/css/animations.min.css" rel="stylesheet" />
+    <link href="Content/css/custom.min.css" rel="stylesheet" />
+
+    <!-- Library Scripts -->
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.min.js"></script>
+    <script src="bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
+    <script src="bower_components/angular-material/angular-material.min.js"></script>
+    <script src="bower_components/angular-material-icons/angular-material-icons.min.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.min.js"></script>
+    <script src="bower_components/angular-route/angular-route.min.js"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <script src="bower_components/jquery.localScroll/jquery.localScroll.min.js"></script>
+    <script src="bower_components/jquery.scrollTo/jquery.scrollTo.min.js"></script>
+    <script src="bower_components/svg-morpheus/compile/minified/svg-morpheus.js"></script>
+    <script src="bower_components/wow/dist/wow.min.js"></script>
+
+    <!-- Infrastructure Scripts -->
+    <script src="app/appModule.js"></script>
+    <script src="app/appConstants.js"></script>
+    <script src="app/appValues.js"></script>
+    <script src="app/appStart.js"></script>
+    <script src="app/appConfig.js"></script>
+    <script src="app/appRouteConfig.js"></script>
+
+    <script src="app/directives/decorators/ngEnter.js"></script>
+    <script src="app/directives/decorators/ngIgnoreMouseWheel.js"></script>
+    <script src="app/directives/decorators/ngOnRepeatFinished.js"></script>
+    <script src="app/data_services/http/httpServiceBase.js"></script>
+    <script src="app/data_services/local/localStorageBase.js"></script>
+
+    <!-- App Scripts -->
+    <script src="app/services/projectBuilderService.js"></script>
+    <script src="app/controllers/mainController.js"></script>
+
+</head>
+<body>
+    <div class="main-controller" ng-controller="mainController" md-theme="{{theme}}" layout="column" ng-cloak>
+        <section layout="row" flex>
+            <md-sidenav class="md-sidenav-left" md-component-id="sidenav-left"
+                        md-is-locked-open="$mdMedia('gt-md')"
+                        md-whiteframe="4"
+                        md-swipe-left="close()">
+                <md-toolbar class="md-primary md-hue-1">
+                    <div class="md-toolbar-tools">
+                        <md-button class="md-icon-button" ng-click="close()" hide-gt-md>
+                            <md-tooltip>
+                                Hide Menu
+                            </md-tooltip>
+                            <ng-md-icon icon="arrow_back"></ng-md-icon>
+                        </md-button>
+                        <h2 class="md-toolbar-brand">
+                            <span>XFBootstrapper</span>
+                        </h2>
+                        <span flex></span>
+                    </div>
+                </md-toolbar>
+                <!--<md-toolbar class="md-accent md-whiteframe-dp">
+                    <h4 class="md-toolbar-text">
+                        <span>Your Project</span>
+                    </h4>
+                </md-toolbar>-->
+                <md-content layout-align="top left" layout="column">
+                    <div layout-padding class="md-whiteframe-1dp" layout="column">
+                        <div layout="row">
+                            <span>New XFBootstrapper Project</span>
+                        </div>
+                        <div layout="column">
+                            <div layout-padding>Project Configuration is {{percentComplete}}% complete</div>
+                            <md-progress-linear class="md-primary" md-mode="determinate" value="{{percentComplete}}"
+                                                md-buffer-value="{{thisStepCompletionValue}}"></md-progress-linear>
+                        </div>
+                        <div layout="row">
+                            <md-button class="md-primary md-raised" ng-disabled="true">
+                                Download Project
+                            </md-button>
+                        </div>
+                    </div>
+                    <div layout="column" layout-padding>
+                        <span>Project Configuration</span>
+                        <div layout="column" layout-padding>
+                            <md-button class="md-primary" ng-click="changeLocation('start')" style="text-transform: capitalize; text-align: left">
+                                Start and Project Naming
+                            </md-button>
+                            <div layout="column" layout-padding ng-show="project.name !== undefined && project.name != ''" style="margin-left: 20px;">
+                                <span>{{project.name}}</span>
+                            </div>
+                        </div>
+                        <div layout="column" layout-padding>
+                            <md-button class="md-primary" ng-click="changeLocation('type')" style="text-transform: capitalize; text-align: left">
+                                Project Type
+                            </md-button>
+                            <div layout="column" layout-padding ng-show="project.type !== undefined">
+                                <span>{{project.type}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </md-content>
+            </md-sidenav>
+            <md-content flex>
+                <md-toolbar class="md-primary" md-scroll-shrink md-swipe-right="open()">
+                    <div class="md-toolbar-tools">
+                        <md-button class="md-icon-button" ng-click="open()" hide-gt-md>
+                            <md-tooltip>
+                                Show Menu
+                            </md-tooltip>
+                            <ng-md-icon icon="menu"></ng-md-icon>
+                        </md-button>
+                        <h2 class="md-toolbar-brand" hide-gt-md>
+                            <span>XFBootstrapper</span>
+                        </h2>
+                    </div>
+                </md-toolbar>
+                <section class="view-section" layout="column" flex layout-align="top center">
+                    <ng-view flex></ng-view>
+                </section>
+            </md-content>
+        </section>
+    </div>
+</body>
+</html>
