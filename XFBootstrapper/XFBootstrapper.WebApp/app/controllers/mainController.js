@@ -1,6 +1,6 @@
 ﻿"use strict";
-angular.module('app').controller('mainController', ['$scope', '$mdMedia', '$mdSidenav', '$location', '$interval',
-    function ($scope, $mdMedia, $mdSidenav, $location, $interval) {
+angular.module('app').controller('mainController', ['$scope', '$mdMedia', '$mdSidenav', '$location', '$interval', 'httpFeaturesService', 'httpAdvancedSettingsService',
+    function ($scope, $mdMedia, $mdSidenav, $location, $interval, httpFeaturesService, httpAdvancedSettingsService) {
 
         // TODO initializing plugins and features
         $scope.$location = $location;
@@ -21,6 +21,76 @@ angular.module('app').controller('mainController', ['$scope', '$mdMedia', '$mdSi
             return $mdSidenav('sidenav-left').isOpen();
         };
 
+        $scope.featuresAreLoading = false;
+        $scope.advancedSettingsAreLoading = false;
+
+        $scope.$on('$locationChangeSuccess', function (ev, newUrl, oldUrl, newState, oldState) {
+            var path = ev.currentScope.$location.path();
+
+            if (path != ('/start') && !$scope.validateProjectName()) {
+                $scope.changeLocation('start');
+                return;
+            }
+            //if ((path != ('/start') || path != ('/type')) && $scope.project.type === undefined) {
+            //    $scope.changeLocation('type');
+            //    return;
+            //}
+
+            if (path == ('/features')) {
+                if ($scope.project.features === undefined) {
+                    $scope.project.features = [];
+                }
+                if ($scope.features === undefined) {
+                    $scope.featuresAreLoading = true;
+                    httpFeaturesService.getFeatures()
+                    .then(function (result) {
+                        $scope.features = result.data;
+                        $scope.featureRows = [];
+                        var featureRow = [];
+                        for (var i = 1; i <= $scope.features.length; i++) {
+                            featureRow.push($scope.features[i - 1]);
+
+                            if (i % 5 == 0) {
+                                $scope.featureRows.push(featureRow);
+                                featureRow = [];
+                            }
+                        }
+                        $scope.featureRows.push(featureRow);
+                    }, function (error) {
+
+                    }).then(function () {
+                        $scope.featuresAreLoading = false;
+                    });
+                }
+            }
+            if (path == ('/advanced')) {
+                if ($scope.project.advanced === undefined) {
+                    $scope.project.advanced = [];
+                }
+                if ($scope.advancedSettings === undefined) {
+                    $scope.advancedSettingsAreLoading = true;
+                    httpAdvancedSettingsService.getAdvancedSettings()
+                    .then(function (result) {
+                        $scope.advancedSettings = result.data;
+                        $scope.advancedSettingRows = [];
+                        var advancedSettingRow = [];
+                        for (var i = 1; i <= $scope.advancedSettings.length; i++) {
+                            advancedSettingRow.push($scope.advancedSettings[i - 1]);
+
+                            if (i % 5 == 0) {
+                                $scope.advancedSettingRows.push(advancedSettingRow);
+                                advancedSettingRow = [];
+                            }
+                        }
+                        $scope.advancedSettingRows.push(advancedSettingRow);
+                    }, function (error) {
+                    }).then(function () {
+                        $scope.advancedSettingsAreLoading = false;
+                    });
+                }
+            }
+        });
+
         $scope.changeLocation = function (routeName) {
             $location.path(routeName);
         };
@@ -35,13 +105,19 @@ angular.module('app').controller('mainController', ['$scope', '$mdMedia', '$mdSi
             var percent = 0;
 
             if ($scope.validateProjectName()) { percent += 10; }
-            if ($scope.project.type == 'mobile') {
+            if ($scope.project.type === 'mobile') {
                 percent += 5;
                 if ($scope.project.platforms !== undefined && $scope.project.platforms.length > 0) {
                     percent += 10;
                 }
-            } else if ($scope.project.type == 'web') {
+            } else if ($scope.project.type === 'web') {
                 percent += 15;
+            }
+            if ($scope.project.features !== undefined) {
+                percent += 70;
+            }
+            if ($scope.project.advanced !== undefined) {
+                percent += 5;
             }
 
             return percent;
@@ -57,6 +133,16 @@ angular.module('app').controller('mainController', ['$scope', '$mdMedia', '$mdSi
                 case '/mobileplatform':
                     $scope.changeLocation('type');
                     break;
+                case '/features':
+                    if ($scope.project.type === 'mobile') {
+                        $scope.changeLocation('mobileplatform');
+                    } else {
+                        $scope.changeLocation('type');
+                    }
+                    break;
+                case '/advanced':
+                    $scope.changeLocation('features');
+                    break;
                 default:
 
             }
@@ -68,11 +154,21 @@ angular.module('app').controller('mainController', ['$scope', '$mdMedia', '$mdSi
                     $scope.changeLocation('type');
                     break;
                 case '/type':
-                    if ($scope.project.type == 'mobile') {
+                    if ($scope.project.type === 'mobile') {
                         $scope.changeLocation('mobileplatform');
+                    }
+                    else {
+                        $scope.changeLocation('features');
                     }
                     break;
                 case '/mobileplatform':
+                    $scope.changeLocation('features');
+                    break;
+                case '/features':
+                    $scope.changeLocation('advanced');
+                    break;
+                case '/advanced':
+                    $scope.changeLocation('download');
                     break;
                 default:
 

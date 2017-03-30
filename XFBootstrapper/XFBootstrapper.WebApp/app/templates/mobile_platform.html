@@ -1,7 +1,7 @@
 ﻿<div layout="column" style="margin-bottom: 20px;">
     <h1 md-colors="::{color: 'primary'}">Mobile App Platform</h1>
     <h3>The next step is to choose the platforms you'd like you mobile app to run on</h3>
-    <div layout="row" layout-sm="column" flex>
+    <div layout="row" layout-sm="column" layout-xs="column" flex>
         <div ng-repeat="mobilePlatform in mobilePlatformSource" flex layout="column" 
              md-colors="{borderColor: mobilePlatform.isEnabled ? mobilePlatform.isChecked ? 'amber' : 'primary': 'accent', 
                          color: mobilePlatform.isEnabled ? mobilePlatform.isChecked ? 'amber' : 'primary': 'accent'}" 

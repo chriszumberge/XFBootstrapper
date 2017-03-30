@@ -67,12 +67,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\data\configPages.js" />
+    <Content Include="app\data_services\http\httpAdvancedSettingsService.js" />
+    <Content Include="app\data_services\http\httpFeaturesService.js" />
     <Content Include="app\directives\structural\configValueInput\configValueInputDirective.js" />
     <Content Include="app\directives\structural\configValueInput\configValueInputTemplate.html" />
     <Content Include="app\infrastructure\configPageContentBodyDirective.js" />
     <Content Include="app\infrastructure\configPageContentBodyTemplate.html" />
     <Content Include="app\infrastructure\configPageContentDirective.js" />
     <Content Include="app\infrastructure\configPageContentTemplate.html" />
+    <Content Include="app\templates\advanced.html" />
+    <Content Include="app\templates\download.html" />
+    <Content Include="app\templates\features.html" />
     <Content Include="app\templates\mobile_platform.html" />
     <Content Include="app\templates\project_type.html" />
     <Content Include="Content\js\jsHelpers.js" />
@@ -224,6 +229,8 @@
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
+    <None Include="Properties\PublishProfiles\xfbootstrapper - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\xfbootstrapper - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1570,7 +1577,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>62114</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:62114/</IISUrl>
+          <IISUrl>http://localhost/XFBootstrapper</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

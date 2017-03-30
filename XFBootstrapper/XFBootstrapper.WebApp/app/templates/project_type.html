@@ -1,7 +1,7 @@
 ﻿<div layout="column" style="margin-bottom: 20px;">
     <h1 md-colors="::{color: 'primary'}">Project Type</h1>
     <h3>The next step is to choose your project type</h3>
-    <div layout="row" layout-sm="column" flex>
+    <div layout="row" layout-sm="column" layout-xs="column" flex>
         <div flex layout="column" md-colors="{borderColor: project.type == 'mobile' ? 'amber' : 'primary',
                                               color: project.type == 'mobile' ? 'amber' : 'primary'}" ng-click="project.type = 'mobile'"
              style="cursor:pointer; border-width: 3px; border-radius: 10px; border-style: solid; text-align:center; min-width: 200px; min-height: 200px;">
@@ -19,8 +19,10 @@
             <span flex></span>
         </div>
         <span flex></span>
-        <div flex layout="column" md-colors="{borderColor: project.type == 'web' ? 'amber' : 'primary',
+        <!--<div flex layout="column" md-colors="{borderColor: project.type == 'web' ? 'amber' : 'primary',
                                               color: project.type == 'web' ? 'amber' : 'primary'}" ng-click="project.type = 'web'"
+             style="cursor: pointer; border-width: 3px; border-radius: 10px; border-style: solid; text-align:center; min-width: 200px; min-height: 200px;">-->
+        <div flex layout="column" md-colors="{borderColor: 'accent', color: 'accent'}" ng-click=""
              style="cursor: pointer; border-width: 3px; border-radius: 10px; border-style: solid; text-align:center; min-width: 200px; min-height: 200px;">
             <span flex></span>
             <h2>Web Application</h2>
@@ -29,7 +31,7 @@
                 <ng-md-icon icon="desktop_mac" size="30"></ng-md-icon>
                 <ng-md-icon icon="web" size="30"></ng-md-icon>
                 <!--<span flex>
-                    <ng-md-icon icon="{{webAppIcon}}" size="24" options='{"rotation": "none", "duration": "300"}'></ng-md-icon>
+                <ng-md-icon icon="{{webAppIcon}}" size="24" options='{"rotation": "none", "duration": "300"}'></ng-md-icon>
                 </span>-->
                 <span flex></span>
             </div>

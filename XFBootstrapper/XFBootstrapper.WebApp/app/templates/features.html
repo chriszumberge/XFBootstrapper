@@ -1,0 +1,34 @@
+﻿<div layout="column" style="margin-bottom: 20px;" flex>
+    <h1 md-colors="::{color: 'primary'}">Application Features</h1>
+    <h3>
+        Select a category and dive into it's features to add and configure them for your project.
+        <br/>
+        <span style="font-size: 15px">Greyed out categories have no features installed but you can download community developed ones or program your own!</span>
+    </h3>
+    <div layout="row" flex layout-align="space-around" ng-show="featuresAreLoading">
+        <md-progress-circular md-mode="indeterminate" class="md-primary"></md-progress-circular>
+    </div>
+    <div layout="column" flex>
+        <div ng-repeat="featureRow in featureRows">
+            <div layout="row" layout-sm="column" layout-xs="column" flex>
+                <div ng-repeat="extensionPoint in featureRow">
+                    <div flex layout="column"
+                         md-colors="{borderColor: extensionPoint.features.length != 0 ? 'primary' : 'accent', 
+                                     color: extensionPoint.features.length != 0 ? 'primary' : 'accent'}"
+                         ng-click=""
+                         style="cursor:pointer; border-width: 3px; border-radius: 10px; border-style: solid; text-align:center; min-width: 200px; min-height: 200px; max-width:200px; max-height: 200px; margin: 5px;"
+                         ng-disabled="extensionPoint.features.length == 0">
+                        <span flex></span>
+                        <h2>{{ extensionPoint.name }}</h2>
+                        <div layout="row">
+                            <span flex></span>
+                            <ng-md-icon icon="{{ extensionPoint.icon }}" size="40"></ng-md-icon>
+                            <span flex></span>
+                        </div>
+                        <span flex></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

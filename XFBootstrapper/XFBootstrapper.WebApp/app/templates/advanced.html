@@ -1,0 +1,36 @@
+﻿<div layout="column" style="margin-bottom: 20px;">
+    <h1 md-colors="::{color: 'primary'}">Advanced Settings</h1>
+    <h3>
+        Only toy with this section if you know what you're doing.<br />
+        <span style="font-size: 15px;">
+            Chances are it's set up exactly how you need it,
+            so unless you need to extend the solution's customizability or apply specific business requirements, you should leave these values alone.
+        </span>
+    </h3>
+    <div layout="row" flex layout-align="space-around" ng-show="advancedSettingsAreLoading">
+        <md-progress-circular md-mode="indeterminate" class="md-primary"></md-progress-circular>
+    </div>
+    <div layout="column" flex>
+        <div ng-repeat="advancedSettingRow in advancedSettingRows">
+            <div layout="row" layout-sm="column" layout-xs="column">
+                <div ng-repeat="advancedSetting in advancedSettingRow">
+                    <div flex layout="column"
+                         md-colors="{borderColor: advancedSetting.settings.length != 0 ? 'primary' : 'accent',
+                                     color: advancedSetting.settings.length != 0 ? 'primary' : 'accent'}"
+                         ng-click=""
+                         style="cursor:pointer; border-width: 3px; border-radius: 10px; border-style: solid; text-align:center; min-width: 200px; min-height: 200px; max-width:200px; max-height: 200px; margin: 5px;"
+                         ng-disabled="advancedSetting.settings.length == 0">
+                        <span flex></span>
+                        <h2>{{ advancedSetting.name }}</h2>
+                        <div layout="row">
+                            <span flex></span>
+                            <ng-md-icon icon="{{ advancedSetting.icon }}" size="40"></ng-md-icon>
+                            <span flex></span>
+                        </div>
+                        <span flex></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

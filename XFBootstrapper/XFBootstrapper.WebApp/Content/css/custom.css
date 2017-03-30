@@ -30,7 +30,7 @@
             }
 
             .main-controller > section > md-content .view-section {
-                max-height: calc(100% - 64px);
+                /*max-height: calc(100% - 64px);*/
                 min-height: calc(100% - 64px);
                 max-width: 100%;
             }

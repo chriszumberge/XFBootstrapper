@@ -25,6 +25,24 @@ angular.module('app').config(['$routeProvider', function ($routeProvider) {
             config: {
                 templateUrl: 'app/templates/mobile_platform.html'
             }
+        },
+        {
+            url: '/features',
+            config: {
+                templateUrl: 'app/templates/features.html'
+            }
+        },
+        {
+            url: '/advanced',
+            config: {
+                templateUrl: 'app/templates/advanced.html'
+            }
+        },
+        {
+            url: '/download',
+            config: {
+                templateUrl: 'app/templates/download.html'
+            }
         }
     ];
 
