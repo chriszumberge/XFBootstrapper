@@ -127,16 +127,18 @@
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="ZESoft.Common, Version=1.0.6296.23154, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ZESoft.Common.1.0.6296.23154\lib\portable45-net45+win8+wpa81\ZESoft.Common.dll</HintPath>
+    <Reference Include="ZESoft.Common, Version=1.0.6298.40553, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZESoft.Common.1.0.6298.40553\lib\portable45-net45+win8+wpa81\ZESoft.Common.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Plugins\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\XFBStartup.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -234,6 +236,10 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\XFBootstrapper.Business\XFBootstrapper.Business.csproj">
+      <Project>{d8d889f9-e574-4c66-a567-6cce74f23ab8}</Project>
+      <Name>XFBootstrapper.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\XFBootstrapper.Extensibility\XFBootstrapper.Extensibility.csproj">
       <Project>{9DEA4256-137B-43F8-B120-240A3360B21F}</Project>
       <Name>XFBootstrapper.Extensibility</Name>
@@ -282,6 +288,9 @@
     <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
+  <PropertyGroup>
+    <PostBuildEvent>XCOPY "$(ProjectDir)Plugins" "$(TargetDir)Plugins\" /S /Y</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

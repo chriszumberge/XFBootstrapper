@@ -10,20 +10,24 @@ namespace XFBootstrapper.OpenWebAPI.ViewModels
     [DataContract]
     public class FeatureViewModel
     {
+        ExtensionPoint extensionPoint;
+
         [DataMember]
-        public string name { get; set; }
+        public string name { get; protected set; }
         [DataMember]
-        public int value { get; set; }
+        public int value { get; protected set; }
         [DataMember]
-        public string icon { get; set; }
+        public string icon { get; protected set; }
+
         [DataMember]
         public List<PluginViewModel> features { get; set; } = new List<PluginViewModel>();
 
         public FeatureViewModel(ExtensionPoint extPoint)
         {
-            name = extPoint.Name;
-            value = extPoint.Value;
-            icon = extPoint.Icon;
+            extensionPoint = extPoint;
+            name = extensionPoint.Name;
+            value = extensionPoint.Value;
+            icon = extensionPoint.Icon;
         }
     }
 }

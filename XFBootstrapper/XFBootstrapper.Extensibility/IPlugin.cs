@@ -18,7 +18,7 @@ namespace XFBootstrapper.Extensibility
         string ReleaseNotes { get; }
 
         bool RequireLicenseAcceptance { get; }
-        string Licensing { get; }
+        string LicensingText { get; }
 
         ExtensionPoint ExtensionPoint { get; }
     }

@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XFBootstrapper.Business", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XFBootstrapper.Business.Tests", "XFBootstrapper.Business.Tests\XFBootstrapper.Business.Tests.csproj", "{D4626394-5C48-4C3B-AE68-D45CF53596B5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XFBootstrapper.Plugins", "XFBootstrapper.Plugins\XFBootstrapper.Plugins.csproj", "{634C5F6C-EAB5-42D4-8109-8F03C503AE1F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{D4626394-5C48-4C3B-AE68-D45CF53596B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4626394-5C48-4C3B-AE68-D45CF53596B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4626394-5C48-4C3B-AE68-D45CF53596B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{634C5F6C-EAB5-42D4-8109-8F03C503AE1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{634C5F6C-EAB5-42D4-8109-8F03C503AE1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{634C5F6C-EAB5-42D4-8109-8F03C503AE1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{634C5F6C-EAB5-42D4-8109-8F03C503AE1F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
