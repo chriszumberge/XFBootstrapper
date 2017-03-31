@@ -93,8 +93,13 @@ namespace XFBootstrapper.Plugins
         {
             get
             {
-                return "1.0.0.0";
+                return new VersionNumber(1, 0, 0).ToString();
             }
+        }
+
+        public void Configure(ref IProjectContext projectContext)
+        {
+            
         }
     }
 }

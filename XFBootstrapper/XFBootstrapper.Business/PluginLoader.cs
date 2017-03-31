@@ -9,13 +9,26 @@ using XFBootstrapper.Extensibility;
 
 namespace XFBootstrapper.Business
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public sealed class PluginLoader
     {
         //Dictionary<string, IPlugin> mPlugins { get; set; }
         //public Dictionary<string, IPlugin> Plugins => mPlugins;
         List<IPlugin> mPlugins { get; set; } = new List<IPlugin>();
+        /// <summary>
+        /// Gets the plugins.
+        /// </summary>
+        /// <value>
+        /// The plugins.
+        /// </value>
         public List<IPlugin> Plugins => mPlugins;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PluginLoader"/> class.
+        /// </summary>
+        /// <exception cref="System.Exception"></exception>
         public PluginLoader()
         {
             // Get all the dlls in the plugin installation path

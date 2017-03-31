@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XFBootstrapper.Extensibility", "XFBootstrapper.Extensibility\XFBootstrapper.Extensibility.csproj", "{9DEA4256-137B-43F8-B120-240A3360B21F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XFBootstrapper.OpenWebAPI", "XFBootstrapper.OpenWebAPI\XFBootstrapper.OpenWebAPI.csproj", "{7A560B67-81CE-4B53-BFBA-21836F09152C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{634C5F6C-EAB5-42D4-8109-8F03C503AE1F} = {634C5F6C-EAB5-42D4-8109-8F03C503AE1F}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XFBootstrapper.OpenWebAPI.Tests", "XFBootstrapper.OpenWebAPI.Tests\XFBootstrapper.OpenWebAPI.Tests.csproj", "{2E822459-FAD9-4132-8D8C-4D64DA22864C}"
 EndProject
@@ -20,6 +23,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XFBootstrapper.Business.Tests", "XFBootstrapper.Business.Tests\XFBootstrapper.Business.Tests.csproj", "{D4626394-5C48-4C3B-AE68-D45CF53596B5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XFBootstrapper.Plugins", "XFBootstrapper.Plugins\XFBootstrapper.Plugins.csproj", "{634C5F6C-EAB5-42D4-8109-8F03C503AE1F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSCodeGen", "..\..\CSCodeGen\CSCodeGen\CSCodeGen.csproj", "{49230E6D-B19F-4C0E-A746-1674A1515435}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlnGen", "..\..\CSCodeGen\SlnGen\SlnGen.csproj", "{FF8D562F-FC99-4308-B089-E07C9EF8E220}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +70,14 @@ Global
 		{634C5F6C-EAB5-42D4-8109-8F03C503AE1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{634C5F6C-EAB5-42D4-8109-8F03C503AE1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{634C5F6C-EAB5-42D4-8109-8F03C503AE1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49230E6D-B19F-4C0E-A746-1674A1515435}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49230E6D-B19F-4C0E-A746-1674A1515435}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49230E6D-B19F-4C0E-A746-1674A1515435}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49230E6D-B19F-4C0E-A746-1674A1515435}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF8D562F-FC99-4308-B089-E07C9EF8E220}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF8D562F-FC99-4308-B089-E07C9EF8E220}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF8D562F-FC99-4308-B089-E07C9EF8E220}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF8D562F-FC99-4308-B089-E07C9EF8E220}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

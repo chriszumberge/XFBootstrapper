@@ -7,12 +7,28 @@ using ZESoft.Common;
 
 namespace XFBootstrapper.Extensibility
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="ZESoft.Common.TypeSafeEnum" />
     public sealed class ExtensionPoint : TypeSafeEnum
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ExtensionPoint"/> class.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="icon">The icon.</param>
         private ExtensionPoint(int value, string name, string icon) : base(value, name)
         {
             mIcon = icon;
         }
+        /// <summary>
+        /// Gets the icon.
+        /// </summary>
+        /// <value>
+        /// The icon.
+        /// </value>
         public string Icon => mIcon;
         private string mIcon { get; set; }
 
