@@ -1,6 +1,6 @@
 ﻿"use strict";
-angular.module('app').controller('mainController', ['$scope', '$mdMedia', '$mdSidenav', '$location', '$interval', 'httpFeaturesService', 'httpAdvancedSettingsService',
-    function ($scope, $mdMedia, $mdSidenav, $location, $interval, httpFeaturesService, httpAdvancedSettingsService) {
+angular.module('app').controller('mainController', ['$scope', '$mdMedia', '$mdSidenav', '$location', '$interval', '$timeout', 'httpFeaturesService', 'httpAdvancedSettingsService',
+    function ($scope, $mdMedia, $mdSidenav, $location, $interval, $timeout, httpFeaturesService, httpAdvancedSettingsService) {
 
         // TODO initializing plugins and features
         $scope.$location = $location;
@@ -27,6 +27,8 @@ angular.module('app').controller('mainController', ['$scope', '$mdMedia', '$mdSi
         $scope.$on('$locationChangeSuccess', function (ev, newUrl, oldUrl, newState, oldState) {
             var path = ev.currentScope.$location.path();
 
+            $scope.deselectExtensionPoint();
+
             if (path != ('/start') && !$scope.validateProjectName()) {
                 $scope.changeLocation('start');
                 return;
@@ -38,7 +40,8 @@ angular.module('app').controller('mainController', ['$scope', '$mdMedia', '$mdSi
 
             if (path == ('/features')) {
                 if ($scope.project.features === undefined) {
-                    $scope.project.features = [];
+                    //$scope.project.features = [];
+                    $scope.project.features = {};
                 }
                 if ($scope.features === undefined) {
                     $scope.featuresAreLoading = true;
@@ -98,7 +101,8 @@ angular.module('app').controller('mainController', ['$scope', '$mdMedia', '$mdSi
         $scope.project = {
             name: undefined,
             type: undefined,
-            platforms: []
+            platforms: [],
+            featureIds: []
         };
 
         $scope.getPercentComplete = function () {
@@ -115,6 +119,10 @@ angular.module('app').controller('mainController', ['$scope', '$mdMedia', '$mdSi
             }
             if ($scope.project.features !== undefined) {
                 percent += 70;
+
+                if ($scope.areThereMissingConfigurations()) {
+                    percent -= 25;
+                }
             }
             if ($scope.project.advanced !== undefined) {
                 percent += 5;
@@ -165,6 +173,13 @@ angular.module('app').controller('mainController', ['$scope', '$mdMedia', '$mdSi
                     $scope.changeLocation('features');
                     break;
                 case '/features':
+                    if ($scope.project.featureIds.length > 0 && $scope.areThereMissingConfigurations()) {
+                        $scope.changeLocation('configure');
+                    } else {
+                        $scope.changeLocation('advanced');
+                    }
+                    break;
+                case '/configure':
                     $scope.changeLocation('advanced');
                     break;
                 case '/advanced':
@@ -233,5 +248,59 @@ angular.module('app').controller('mainController', ['$scope', '$mdMedia', '$mdSi
                 isChecked: false
             }
         ];
+
+        //$scope.selectedExtensionPoint = undefined;
+        $scope.selectExtensionPoint = function (extensionPoint) {
+            if (extensionPoint.features.length != 0) {
+                $scope.selectedExtensionPoint = extensionPoint;
+            }
+        };
+        $scope.deselectExtensionPoint = function () {
+            $scope.deselectFeature();
+            $scope.selectedExtensionPoint = undefined;
+        };
+        $scope.selectFeature = function (feature) {
+            $scope.selectedFeature = feature;
+        };
+        $scope.deselectFeature = function () {
+            $scope.selectedFeature = undefined;
+        };
+
+        $scope.addFeatureToProject = function (selectedFeature) {
+            $scope.configuringFeature = true;
+            $scope.project.features[selectedFeature.id] = {
+                configs: [
+                    {
+                        name: 'test',
+                        value: undefined
+                    }
+                ]
+            };
+
+            $scope.project.featureIds.push(selectedFeature.id);
+        };
+
+
+        window.DEBUG = {};
+        window.DEBUG.getProject = function () {
+            return $scope.project;
+        };
+
+        $scope.areThereMissingConfigurations = function () {
+            var areThere = false;
+
+            $.each($scope.project.featureIds, function (index, featureId) {
+                var feature = $scope.project.features[featureId];
+
+                $.each(feature.configs, function (configIndex, config) {
+                    if (config.value === undefined)
+                    {
+                        areThere = true;
+                    }
+                });
+            });
+
+            return areThere;
+        };
     }
 ])

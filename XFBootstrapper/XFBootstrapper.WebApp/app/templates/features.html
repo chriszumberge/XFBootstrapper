@@ -1,34 +1,123 @@
-﻿<div layout="column" style="margin-bottom: 20px;" flex>
-    <h1 md-colors="::{color: 'primary'}">Application Features</h1>
-    <h3>
-        Select a category and dive into it's features to add and configure them for your project.
-        <br/>
-        <span style="font-size: 15px">Greyed out categories have no features installed but you can download community developed ones or program your own!</span>
-    </h3>
-    <div layout="row" flex layout-align="space-around" ng-show="featuresAreLoading">
-        <md-progress-circular md-mode="indeterminate" class="md-primary"></md-progress-circular>
-    </div>
-    <div layout="column" flex>
-        <div ng-repeat="featureRow in featureRows">
-            <div layout="row" layout-sm="column" layout-xs="column" flex>
-                <div ng-repeat="extensionPoint in featureRow">
-                    <div flex layout="column"
-                         md-colors="{borderColor: extensionPoint.features.length != 0 ? 'primary' : 'accent', 
-                                     color: extensionPoint.features.length != 0 ? 'primary' : 'accent'}"
-                         ng-click=""
-                         style="cursor:pointer; border-width: 3px; border-radius: 10px; border-style: solid; text-align:center; min-width: 200px; min-height: 200px; max-width:200px; max-height: 200px; margin: 5px;"
-                         ng-disabled="extensionPoint.features.length == 0">
-                        <span flex></span>
-                        <h2>{{ extensionPoint.name }}</h2>
-                        <div layout="row">
+﻿<div layout="column" style="margin-bottom: 20px; padding-top:10px;" flex>
+    <h1 md-colors="::{color: 'primary'}" ng-show="selectedExtensionPoint === undefined" class="animate-fade-in animate-rise-up">Application Features</h1>
+    <md-button class="md-primary animate-fade-in animate-rise-up" ng-show="selectedExtensionPoint !== undefined" ng-click="deselectExtensionPoint()">
+        <ng-md-icon icon="arrow_back"></ng-md-icon>
+        Back to Application Features
+    </md-button>
+    <div class="animate-fade-in animate-rise-up" ng-show="selectedExtensionPoint === undefined">
+        <h3>
+            Select a category and dive into it's features to add and configure them for your project.
+            <br />
+            <span style="font-size: 15px">Greyed out categories have no features installed but you can download community developed ones or program your own!</span>
+        </h3>
+        <div layout="row" flex layout-align="space-around" ng-show="featuresAreLoading" class="animate-fade-in animate-rise-up">
+            <md-progress-circular md-mode="indeterminate" class="md-primary"></md-progress-circular>
+        </div>
+        <div layout="column" flex class="animate-fade-in animate-rise-up" ng-hide="showFeaturesfeaturesAreLoading">
+            <div ng-repeat="featureRow in featureRows">
+                <div layout="row" layout-sm="column" layout-xs="column" flex>
+                    <div ng-repeat="extensionPoint in featureRow">
+                        <div flex layout="column"
+                             md-colors="{borderColor: extensionPoint.features.length != 0 ? selectedExtensionPoint.name == extensionPoint.name ? 'amber': 'primary' : 'accent',
+                                        color: extensionPoint.features.length != 0 ? selectedExtensionPoint.name == extensionPoint.name ? 'amber': 'primary' : 'accent'}"
+                             ng-click="selectExtensionPoint(extensionPoint)"
+                             style="cursor:pointer; border-width: 3px; border-radius: 10px; border-style: solid; text-align:center; min-width: 200px; min-height: 200px; max-width:200px; max-height: 200px; margin: 5px;"
+                             ng-disabled="extensionPoint.features.length == 0">
                             <span flex></span>
-                            <ng-md-icon icon="{{ extensionPoint.icon }}" size="40"></ng-md-icon>
+                            <h2>{{ extensionPoint.name }}</h2>
+                            <div layout="row">
+                                <span flex></span>
+                                <ng-md-icon icon="{{ extensionPoint.icon }}" size="40"></ng-md-icon>
+                                <span flex></span>
+                            </div>
                             <span flex></span>
                         </div>
-                        <span flex></span>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <h1 md-colors="::{color: 'primary'}" class="animate-fade-in animate-rise-up" ng-show="selectedExtensionPoint !== undefined && selectedFeature === undefined">{{selectedExtensionPoint.name}}</h1>
+    <md-button class="md-primary animate-fade-in animate-rise-up" ng-show="selectedFeature !== undefined" ng-click="deselectFeature()">
+        <ng-md-icon icon="arrow_back"></ng-md-icon>
+        Back to {{selectedExtensionPoint.name}}
+    </md-button>
+    <div class="animate-fade-in animate-rise-up" ng-show="selectedExtensionPoint !== undefined && selectedFeature === undefined" style="width: 100%;">
+        <md-list>
+            <md-subheader class="md-no-sticky">Select any feature to configure it and add it to your project.</md-subheader>
+            <md-list-item class="md-3-line" ng-click="selectFeature(feature)" ng-repeat="feature in selectedExtensionPoint.features">
+                <!--<ng-md-icon icon="map"></ng-md-icon>-->
+                <ng-md-icon icon="{{selectedExtensionPoint.icon}}"></ng-md-icon>
+                <div class="md-list-item-text" layout="column">
+                    <h3 layout="row" flex>
+                        <span>{{feature.name}}</span>
+                        <span flex></span>
+                        <span>by {{feature.authors}}</span>
+                    </h3>
+                    <h4 layout="row" flex>
+                        <span>v{{feature.version}}</span>
+                        <span flex></span>
+                        <!--<span>
+                            <ng-md-icon icon="copyright" size="15" style="margin:auto; height:auto;"></ng-md-icon>{{feature.copyright}}
+                        </span>-->
+                    </h4>
+                    <p>
+                        <span>{{feature.description}}</span><br/>
+                    </p>
+                </div>
+            </md-list-item>
+        </md-list>
+    </div>
+    <h1 md-colors="::{color: 'primary'}" class="animate-fade-in animate-rise-up" ng-show="selectedFeature !== undefined">
+        <!--<ng-md-icon icon="map"></ng-md-icon>-->
+        {{selectedFeature.name}}
+    </h1>
+    <div class="animate-fade-in animate-rise-up" ng-show="selectedFeature !== undefined" style="width:100%;" layout="column">
+        <div layout="column">
+            <div layout="row">
+                <h4 style="margin-top: 0; margin-bottom:0;"><span style="font-weight: bolder">Description</span></h4>
+            </div>
+            <div layout="row">
+                <p style="margin-top:5px;">{{selectedFeature.description}}</p>
+            </div>
+        </div>
+        <div layout="row">
+            <h4 style="margin-top: 0;"><span style="font-weight: bolder">Version: </span><span style="font-weight: lighter">{{selectedFeature.version}}</span></h4>
+        </div>
+        <div layout="row">
+            <h4 style="margin-top: 0;"><span style="font-weight: bolder">Author(s): </span><span style="font-weight: lighter">{{selectedFeature.authors}}</span></h4>
+        </div>
+        <div layout="row">
+            <h4 style="margin-top: 0;"><span style="font-weight: bolder">Publish Date: </span><span style="font-weight: lighter">{{selectedFeature.publish_date}}</span></h4>
+        </div>
+        <div layout="row">
+            <h4 style="margin-top: 0;"><span style="font-weight: bolder">Requires License Acceptance: </span><span style="font-weight: lighter">{{selectedFeature.require_license_acceptance}}</span></h4>
+        </div>
+        <div layout="row">
+            <h4 style="margin-top: 0;"><span style="font-weight: bolder">Support URL: </span><a ng-href="{{selectedFeature.support_url}}" target="_blank" style="font-weight: lighter">{{selectedFeature.support_url}}</a></h4>
+        </div>
+        <div layout="column">
+            <div layout="row">
+                <h4 style="margin-top: 0; margin-bottom:0;"><span style="font-weight: bolder">Dependencies</span></h4>
+            </div>
+            <div layout="row">
+                <p style="margin-top:5px;">No dependencies</p>
+            </div>
+        </div>
+        <!--<div layout="row">
+            <h4 style="margin-top: 0;"><span style="font-weight: bolder">Release Notes: </span><span style="font-weight: lighter">{{selectedFeature.release_notes}}</span></h4>
+        </div>-->
+        <div layout="row">
+            <h4 style="margin-top: 0; margin-bottom:0;"><span style="font-weight: bolder">Copyright: </span><span style="font-weight: lighter"><ng-md-icon icon="copyright" style="margin:auto; height:auto;"></ng-md-icon> {{selectedFeature.copyright}}</span></h4>
+        </div>
+    </div>
+    <div class="animate-fade-in animate-rise-up" ng-show="selectedFeature !== undefined" layout="column" style="margin-top: 10px;">
+        <div layout="row">
+            <md-button class="md-primary md-raised" style="color:white;" ng-click="addFeatureToProject(selectedFeature)" ng-show="project.features[selectedFeature.id] === undefined">Add Feature to Project</md-button>
+            <md-button class="md-primary md-raised" ng-disabled="true" ng-show="project.features[selectedFeature.id] !== undefined">Project already has feature</md-button>
+        </div>
+        <div layout="row" class="animate-fade-in animate-rise-up" ng-show="project.features[selectedFeature.id] !== undefined">
+            <md-button class="md-primary md-raised" style="color:white;" ng-click="changeLocation('configure')">Configure this Feature</md-button>
         </div>
     </div>
 </div>

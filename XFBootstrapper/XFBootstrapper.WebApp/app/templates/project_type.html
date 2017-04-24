@@ -2,6 +2,7 @@
     <h1 md-colors="::{color: 'primary'}">Project Type</h1>
     <h3>The next step is to choose your project type</h3>
     <div layout="row" layout-sm="column" layout-xs="column" flex>
+        <span flex></span>
         <div flex layout="column" md-colors="{borderColor: project.type == 'mobile' ? 'amber' : 'primary',
                                               color: project.type == 'mobile' ? 'amber' : 'primary'}" ng-click="project.type = 'mobile'"
              style="cursor:pointer; border-width: 3px; border-radius: 10px; border-style: solid; text-align:center; min-width: 200px; min-height: 200px;">
@@ -37,5 +38,6 @@
             </div>
             <span flex></span>
         </div>
+        <span flex></span>
     </div>
 </div>

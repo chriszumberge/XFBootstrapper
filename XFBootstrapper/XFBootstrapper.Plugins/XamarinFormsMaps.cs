@@ -7,95 +7,48 @@ using XFBootstrapper.Extensibility;
 
 namespace XFBootstrapper.Plugins
 {
+    /// <summary>
+    /// Cross Platform implementation of native maps for use with Xamarin.Forms projects.
+    /// </summary>
+    /// <seealso cref="XFBootstrapper.Extensibility.IPlugin" />
     public class XamarinFormsMaps : IPlugin
     {
-        public string Authors
-        {
-            get
-            {
-                return "Zumberge Enterprises";
-            }
-        }
+        public string Authors => "Zumberge Enterprises";
 
-        public string Copyright
-        {
-            get
-            {
-                return "Zumberge Enterprises 2017";
-            }
-        }
+        public string Copyright => "Zumberge Enterprises 2017";
 
-        public string Description
-        {
-            get
-            {
-                return "Cross Platform implementation of native maps for use with Xamarin.Forms projects";
-            }
-        }
+        public string Description => "Cross Platform implementation of native maps for use with Xamarin.Forms projects";
 
-        public ExtensionPoint ExtensionPoint
-        {
-            get
-            {
-                return ExtensionPoint.MobileServices;
-            }
-        }
+        public ExtensionPoint ExtensionPoint => ExtensionPoint.MobileServices;
 
-        public string Id
-        {
-            get
-            {
-                return "com.zesoft.plugin.xamarinformsmaps";
-            }
-        }
+        public string Id => "com.zesoft.plugin.xamarinformsmaps";
 
-        public string LicensingText
-        {
-            get
-            {
-                return String.Empty;
-            }
-        }
+        public bool RequireLicenseAcceptance => false;
 
-        public string Name
-        {
-            get
-            {
-                return "Maps";
-            }
-        }
+        public string LicensingText => String.Empty;
 
-        public string Owners
-        {
-            get
-            {
-                return "Zumberge Enterprises";
-            }
-        }
+        public string Name => "Maps";
 
-        public string ReleaseNotes
-        {
-            get
-            {
-                return "Initial offering of the Map plugin.";
-            }
-        }
+        public string Owners => "Zumberge Enterprises";
 
-        public bool RequireLicenseAcceptance
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public string ReleaseNotes => "Initial offering of the Map plugin.";
 
-        public string Version
+        public string Version => new VersionNumber(1, 0, 0).ToString();
+
+        public List<ProjectType> RequiredProjectTypes => new List<ProjectType>
         {
-            get
-            {
-                return new VersionNumber(1, 0, 0).ToString();
-            }
-        }
+            ProjectType.Mobile
+        };
+
+        public List<ProjectType> IncompatibleProjectTypes => new List<ProjectType> { };
+
+        public List<ProjectPlatform> RequiredProjectPlatforms => new List<ProjectPlatform> { };
+
+        public List<ProjectPlatform> IncompatibleProjectPlatforms => new List<ProjectPlatform> { };
+
+        public Uri SupportUrl => new Uri("http://chriszumberge.com/");
+
+        public DateTime PublishDate { get; set; }
 
         public void Configure(ref IProjectContext projectContext)
         {

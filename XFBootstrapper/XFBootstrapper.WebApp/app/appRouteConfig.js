@@ -33,6 +33,12 @@ angular.module('app').config(['$routeProvider', function ($routeProvider) {
             }
         },
         {
+            url: '/configure',
+            config: {
+                templateUrl: 'app/templates/configure.html'
+            }
+        },
+        {
             url: '/advanced',
             config: {
                 templateUrl: 'app/templates/advanced.html'

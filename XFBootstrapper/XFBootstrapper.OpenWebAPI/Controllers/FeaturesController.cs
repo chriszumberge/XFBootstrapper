@@ -17,6 +17,11 @@ namespace XFBootstrapper.OpenWebAPI.Controllers
     {
         PluginLoader mPluginLoader = DIServiceProvider.GetInstance().Create<PluginLoader>();
 
+        /// <summary>
+        /// Gets all the available features.
+        /// </summary>
+        /// <returns>A list of FeatureViewModel objects.</returns>
+        /// <seealso cref="XFBootstrapper.OpenWebAPI.ViewModels.FeatureViewModel"/>
         [Route("api/Features")]
         [HttpGet]        
         [ResponseType(typeof(List<FeatureViewModel>))]

@@ -13,6 +13,11 @@ namespace XFBootstrapper.OpenWebAPI.Controllers
 {
     public class AdvancedController : ApiController
     {
+        /// <summary>
+        /// Gets all the available advanced settings.
+        /// </summary>
+        /// <returns>A list of AdvancedSettingViewModel objects.</returns>
+        /// <seealso cref="XFBootstrapper.OpenWebAPI.ViewModels.AdvancedSettingViewModel"/>
         [Route("api/AdvancedSettings")]
         [HttpGet]
         [ResponseType(typeof(List<AdvancedSettingViewModel>))]

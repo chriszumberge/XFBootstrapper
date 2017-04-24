@@ -76,6 +76,7 @@
     <Content Include="app\infrastructure\configPageContentDirective.js" />
     <Content Include="app\infrastructure\configPageContentTemplate.html" />
     <Content Include="app\templates\advanced.html" />
+    <Content Include="app\templates\configure.html" />
     <Content Include="app\templates\download.html" />
     <Content Include="app\templates\features.html" />
     <Content Include="app\templates\mobile_platform.html" />

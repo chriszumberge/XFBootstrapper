@@ -67,7 +67,6 @@ namespace XFBootstrapper.Extensibility
         /// The release notes.
         /// </value>
         string ReleaseNotes { get; }
-
         /// <summary>
         /// Gets a value indicating whether [require license acceptance].
         /// </summary>
@@ -82,7 +81,21 @@ namespace XFBootstrapper.Extensibility
         /// The licensing text.
         /// </value>
         string LicensingText { get; }
-
+        /// <summary>
+        /// Gets the support URL.
+        /// </summary>
+        /// <value>
+        /// The support URL.
+        /// </value>
+        Uri SupportUrl { get; }
+        /// <summary>
+        /// Gets or sets the publish date.
+        /// If not defined, will default to using the assembly build date and time.
+        /// </summary>
+        /// <value>
+        /// The publish date.
+        /// </value>
+        DateTime PublishDate { get; set; }
         /// <summary>
         /// Gets the extension point.
         /// </summary>
@@ -90,9 +103,37 @@ namespace XFBootstrapper.Extensibility
         /// The extension point.
         /// </value>
         ExtensionPoint ExtensionPoint { get; }
+        /// <summary>
+        /// Gets the required project types.
+        /// </summary>
+        /// <value>
+        /// The required project types.
+        /// </value>
+        List<ProjectType> RequiredProjectTypes { get; }
+        /// <summary>
+        /// Gets the forbidden project types.
+        /// </summary>
+        /// <value>
+        /// The forbidden project types.
+        /// </value>
+        List<ProjectType> IncompatibleProjectTypes { get; }
+        /// <summary>
+        /// Gets the required project platforms.
+        /// </summary>
+        /// <value>
+        /// The required project platforms.
+        /// </value>
+        List<ProjectPlatform> RequiredProjectPlatforms { get; }
+        /// <summary>
+        /// Gets the forbidden project platforms.
+        /// </summary>
+        /// <value>
+        /// The forbidden project platforms.
+        /// </value>
+        List<ProjectPlatform> IncompatibleProjectPlatforms { get; }
 
         /// <summary>
-        /// Configures the specified project context.
+        /// Allows the plugin to configure the specified project context.
         /// </summary>
         /// <param name="projectContext">The project context.</param>
         void Configure(ref IProjectContext projectContext);

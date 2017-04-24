@@ -85,7 +85,8 @@
                 <md-content layout-align="top left" layout="column">
                     <div layout-padding class="md-whiteframe-1dp" layout="column">
                         <div layout="row">
-                            <span>New XFBootstrapper Project</span>
+                            <span ng-show="project.name == undefined || project.name.length < 3" class="animate-fade-in">New XFBootstrapper Project</span>
+                            <span ng-show="project.name != undefined && project.name.length >= 4" class="animate-fade-in">Project "{{project.name}}"</span>
                         </div>
                         <div layout="column">
                             <div layout-padding>Project Configuration is {{getPercentComplete()}}% complete</div>
@@ -146,6 +147,18 @@
                                                 ng-show="project.features !== undefined"></ng-md-icon>
                                 </div>
                             </md-button>
+                            <div layout="column" ng-show="project.featureIds.length > 0" style="padding-left:35px; padding-right:0;">
+                                <md-button ng-class="{'md-primary': $location.path() == ('/configure') && areThereMissingConfigurations() == false, 'md-accent': $location.path() != ('/configure') && areThereMissingConfigurations() == false,
+                                           'md-warn': areThereMissingConfigurations() == true }"
+                                           ng-click="changeLocation('configure')" style="text-transform: capitalize; text-align: left"
+                                           ng-disabled="">
+                                    <div layout="row" flex>
+                                        <span flex>Configure</span>
+                                        <ng-md-icon icon="check" md-colors="::{fill: 'primary'}"
+                                                    ng-show="project.featureIds.length > 0 && areThereMissingConfigurations() == false"></ng-md-icon>
+                                    </div>
+                                </md-button>
+                            </div>
                         </div>
                         <div layout="column" layout-padding>
                             <md-button ng-class="{'md-primary': $location.path() == ('/advanced'), 'md-accent': $location.path() != ('/advanced')}"
@@ -182,7 +195,7 @@
                     </div>
                 </md-toolbar>
                 <section class="view-section" layout="column" flex layout-align="top center">
-                    <form layout="column" name="configForm" flex>
+                    <form layout="column" name="configForm" flex style="min-width: 60%; max-width:95%;">
                         <ng-view layout="column"></ng-view>
                         <div layout="row">
                             <!--<div flex="100" flex-gt-xs="50" layout-align="top left">
@@ -192,8 +205,8 @@
                                 </md-button>
                             </div>-->
                             <div layout="row" flex="100" flex-gt-xs="50" layout-align="top right">
-                                <md-button class="md-primary md-raised" style="color: white;" ng-disabled="!configForm.$valid"
-                                           ng-click="nextPage();" ng-hide="$location.path() == ('/download')">
+                                <md-button class="md-primary md-raised animate-fade-in animate-rise-up" style="color: white;" ng-disabled="!configForm.$valid"
+                                           ng-click="nextPage();" ng-hide="$location.path() == ('/download') || selectedExtensionPoint !== undefined">
                                     Next Page
                                     <ng-md-icon icon="arrow_forward" style="fill: white;"></ng-md-icon>
                                 </md-button>
