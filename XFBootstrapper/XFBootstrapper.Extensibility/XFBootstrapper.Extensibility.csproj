@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdvancedSetting.cs" />
+    <Compile Include="ConfigurationControl.cs" />
     <Compile Include="ExtensionPoint.cs" />
     <Compile Include="IPlugin.cs" />
     <Compile Include="IProjectContext.cs" />

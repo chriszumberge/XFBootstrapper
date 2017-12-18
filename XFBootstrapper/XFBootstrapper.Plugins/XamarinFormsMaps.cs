@@ -33,7 +33,7 @@ namespace XFBootstrapper.Plugins
 
         public string ReleaseNotes => "Initial offering of the Map plugin.";
 
-        public string Version => new VersionNumber(1, 0, 0).ToString();
+        public VersionNumber Version => new VersionNumber(1, 0, 0);
 
         public List<ProjectType> RequiredProjectTypes => new List<ProjectType>
         {
@@ -49,6 +49,11 @@ namespace XFBootstrapper.Plugins
         public Uri SupportUrl => new Uri("http://chriszumberge.com/");
 
         public DateTime PublishDate { get; set; }
+
+        public string ConfigurationTemplate =>
+            String.Empty;
+            //"<input ng-model='config.name' type='text' />";
+            // File.ReadAllText(*.html);
 
         public void Configure(ref IProjectContext projectContext)
         {

@@ -31,7 +31,7 @@ namespace XFBootstrapper.Extensibility
         /// <value>
         /// The version.
         /// </value>
-        string Version { get; }
+        VersionNumber Version { get; }
         /// <summary>
         /// Gets the authors.
         /// </summary>
@@ -103,34 +103,46 @@ namespace XFBootstrapper.Extensibility
         /// The extension point.
         /// </value>
         ExtensionPoint ExtensionPoint { get; }
+
+        ///// <summary>
+        ///// Gets the required project types.
+        ///// </summary>
+        ///// <value>
+        ///// The required project types.
+        ///// </value>
+        //List<ProjectType> RequiredProjectTypes { get; }
+        ///// <summary>
+        ///// Gets the forbidden project types.
+        ///// </summary>
+        ///// <value>
+        ///// The forbidden project types.
+        ///// </value>
+        //List<ProjectType> IncompatibleProjectTypes { get; }
+        ///// <summary>
+        ///// Gets the required project platforms.
+        ///// </summary>
+        ///// <value>
+        ///// The required project platforms.
+        ///// </value>
+        //List<ProjectPlatform> RequiredProjectPlatforms { get; }
+        ///// <summary>
+        ///// Gets the forbidden project platforms.
+        ///// </summary>
+        ///// <value>
+        ///// The forbidden project platforms.
+        ///// </value>
+        //List<ProjectPlatform> IncompatibleProjectPlatforms { get; }
+
         /// <summary>
-        /// Gets the required project types.
+        /// Gets the configuration template.
         /// </summary>
         /// <value>
-        /// The required project types.
+        /// The configuration template.
         /// </value>
-        List<ProjectType> RequiredProjectTypes { get; }
-        /// <summary>
-        /// Gets the forbidden project types.
-        /// </summary>
-        /// <value>
-        /// The forbidden project types.
-        /// </value>
-        List<ProjectType> IncompatibleProjectTypes { get; }
-        /// <summary>
-        /// Gets the required project platforms.
-        /// </summary>
-        /// <value>
-        /// The required project platforms.
-        /// </value>
-        List<ProjectPlatform> RequiredProjectPlatforms { get; }
-        /// <summary>
-        /// Gets the forbidden project platforms.
-        /// </summary>
-        /// <value>
-        /// The forbidden project platforms.
-        /// </value>
-        List<ProjectPlatform> IncompatibleProjectPlatforms { get; }
+        /// <remarks>
+        /// Available 
+        /// </remarks>
+        string ConfigurationTemplate { get; }
 
         /// <summary>
         /// Allows the plugin to configure the specified project context.

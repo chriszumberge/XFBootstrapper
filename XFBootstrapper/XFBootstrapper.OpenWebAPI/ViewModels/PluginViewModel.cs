@@ -122,7 +122,7 @@ namespace XFBootstrapper.OpenWebAPI.ViewModels
 
             this.name = plugin.Name;
             this.id = plugin.Id;
-            this.version = plugin.Version;
+            this.version = plugin.Version.ToString();
             this.authors = plugin.Authors;
             this.owners = plugin.Owners;
             this.description = plugin.Description;
